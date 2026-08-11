@@ -1,0 +1,8 @@
+Notice: 
+To let the Carvera Z1 work perfectly, please make sure both your MakeraStudio and firmware are up to date. For firmware, download the new lpc1768.bin first, then Copy the lpc1768.bin file to the root directory of the TF card, then restart the machine by cycling the power. The firmware update will take about 2 minutes to complete.
+
+[1.1.2]
+1. Bug fixing: Resolved the issue where the dust collector could not start on the Z1P model after automatic dust collection was enabled.
+2. Optimizing: Added handling for when the manual tool change process is interrupted — the tool number will now be set to empty instead of the originally targeted tool number.
+3. Optimization: Added manual speed adjustment functionality for the spindle fan and electrical cabinet fan (the speed must not be set below the temperature control value during adjustment).
+4. Optimization: Improved spindle light bar display.

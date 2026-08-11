@@ -1,0 +1,65 @@
+/*
+      This file is part of Smoothie (http://smoothieware.org/). The motion control part is heavily based on Grbl (https://github.com/simen/grbl).
+      Smoothie is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+      Smoothie is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+      You should have received a copy of the GNU General Public License along with Smoothie. If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#ifndef SERIALCONSOLE_H
+#define SERIALCONSOLE_H
+
+#include "libs/Module.h"
+#include "Serial.h" // mbed.h lib
+#include "libs/Kernel.h"
+#include <vector>
+#include <string>
+using std::string;
+#include "libs/RingBuffer.h"
+#include "libs/StreamOutput.h"
+#include "libs/SerialMessage.h"
+
+
+#define baud_rate_setting_checksum CHECKSUM("baud_rate")
+class SerialConsole : public Module, public StreamOutput {
+    public:
+        SerialConsole( PinName rx_pin, PinName tx_pin, int baud_rate );
+
+        void on_module_loaded();
+        void on_serial_char_received();
+        void on_main_loop(void * argument);
+        void on_idle(void * argument);
+        void on_set_public_data(void *argument);
+        bool has_char(char letter);
+        void attach_irq(bool enable_irq);
+
+        int _putc(int c);
+        int _getc(void);
+        int puts(const char*, int size = 0);
+        int gets(char** buf, int size = 0);
+        bool ready();
+        char getc_result;
+		void reset(void){ptrData=0;ptr_xbuff=0;currentState = WAIT_HEADER;};
+		int printfcmd(const char cmd, const char *format, ...);
+		int printf(const char *format, ...) __attribute__ ((format(printf, 2, 3)));
+		int receive_cfg_frame(dfu_frame_t *frame, uint32_t timeout_ms);
+		void send_cfg_frame(uint8_t type, uint8_t *data, uint16_t len);
+
+   private:
+   		
+    	void PacketMessage(char cmd, const char* s, int size);
+    	int CheckFilePacket(char** buf);
+	    unsigned int crc16_ccitt(unsigned char *data, unsigned int len);
+        mbed::Serial* serial;
+        struct {
+          bool query_flag:1;
+          bool halt_flag:1;
+          bool diagnose_flag:1;
+        };
+    	ParseState currentState = WAIT_HEADER;    
+        std::string deferred_command;
+        
+	    int ptrData;
+	    int ptr_xbuff;
+};
+
+#endif
