@@ -1,5 +1,5 @@
 # Overview
-This is a branch of the [Smoothieware](https://github.com/Smoothieware/Smoothieware) firmware for the Makera Carvera CNC Machine.Checkout the [Releases Page](https://github.com/MakeraInc/CarveraFirmware/releases)for downloads [Carvera](https://www.makera.com) Firmware.
+This is a branch of the [Smoothieware](https://github.com/Smoothieware/Smoothieware) firmware for the Makera Carvera CNC Machine.Checkout the [Releases Page](https://github.com/MakeraInc/MakeraZ1Firmware/releases)for downloads [Carvera](https://www.makera.com) Firmware.
 
 Smoothie is a free, opensource, high performance G-code interpreter and CNC controller written in Object-Oriented C++ for the LPC17xx micro-controller ( ARM Cortex M3 architecture ). It will run on a mBed, a LPCXpresso, a SmoothieBoard, R2C2 or any other LPC17xx-based board. The motion control part is a port of the awesome grbl.
 
