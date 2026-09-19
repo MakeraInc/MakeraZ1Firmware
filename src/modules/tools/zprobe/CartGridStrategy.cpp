@@ -624,6 +624,8 @@ bool CartGridStrategy::doProbe(Gcode *gc)
     }
 
     setAdjustFunction(false);
+    // compensation may have been on: resync machine_position with the actuators (queue is idle here)
+    THEROBOT->reset_position_from_current_actuator_position();
     reset_bed_level();
 
     if(gc->has_letter('I')) current_grid_x_size = gc->get_value('I'); // override default grid x size

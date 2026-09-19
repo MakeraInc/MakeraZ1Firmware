@@ -370,6 +370,9 @@ bool ZProbe::run_probe_return(float& mm, float feedrate, float max_dist, bool re
     // absolute move back to saved starting position
     coordinated_move(NAN, NAN, save_z_pos, fr, false);
 
+    // if the return move was cut short (abort/flush) we are not where we think, do not carry on probing
+    if(fabsf(THEROBOT->get_axis_position(Z_AXIS) - save_z_pos) > 0.05F) return false;
+
     return ok;
 }
 
@@ -377,6 +380,7 @@ bool ZProbe::doProbeAt(float &mm, float x, float y)
 {
     // move to xy
     coordinated_move(x, y, NAN, getFastFeedrate() * 4);
+    if(fabsf(THEROBOT->get_axis_position(X_AXIS) - x) > 0.05F || fabsf(THEROBOT->get_axis_position(Y_AXIS) - y) > 0.05F) return false; // move interrupted or rejected
     return run_probe_return(mm, slow_feedrate);
 }
 
