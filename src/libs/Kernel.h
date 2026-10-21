@@ -160,7 +160,7 @@ typedef enum {
 // support upload file type definition
 #define FILETYPE	"lz"		//compressed by quicklz
 // version definition
-#define VERSION "1.1.2"
+#define VERSION "1.1.3"
 
 class Kernel {
     public:
