@@ -342,9 +342,9 @@ void Robot::load_config()
     soft_endstop_enabled= THEKERNEL->config->value(soft_endstop_checksum, enable_checksum)->by_default(true)->as_bool();
     soft_endstop_halt = THEKERNEL->config->value(soft_endstop_checksum, halt_checksum)->by_default(true)->as_bool();
 
-    soft_endstop_max[X_AXIS]= -1;
-    soft_endstop_max[Y_AXIS]= -1;
-    soft_endstop_max[Z_AXIS]= -1;
+    soft_endstop_max[X_AXIS]= NAN;
+    soft_endstop_max[Y_AXIS]= NAN;
+    soft_endstop_max[Z_AXIS]= NAN;
     soft_endstop_min[X_AXIS] = THEKERNEL->config->value(soft_endstop_checksum, xmin_checksum)->by_default(-371.0F)->as_number();
     soft_endstop_min[Y_AXIS] = THEKERNEL->config->value(soft_endstop_checksum, ymin_checksum)->by_default(-250.0F)->as_number();
     soft_endstop_min[Z_AXIS] = THEKERNEL->config->value(soft_endstop_checksum, zmin_checksum)->by_default(-135.0F)->as_number();
