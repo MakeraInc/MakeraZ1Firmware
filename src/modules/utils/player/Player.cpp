@@ -70,9 +70,9 @@ extern const unsigned short crc_table[256];
 unsigned long g_request_lines=0;
 volatile bool g_play_data_resend_pending = false; //zqq add 2026.05.20.
 static bool bfilend = false; //zqq modify 2026.08.04
-char queue_storage[14336] __attribute__((section("AHBSRAM1")));
+char queue_storage[14560] __attribute__((section("AHBSRAM1")));	//lsf modify 2026.11.04
 
-StaticQueue gcode_buffer_queue(queue_storage, MAXGCODEQUNE, 64);
+StaticQueue gcode_buffer_queue(queue_storage, MAXGCODEQUNE, 65);	//lsf modify 2026.11.04
 
 Player::Player()
 {
